@@ -2,11 +2,11 @@
 
 @import "./reset.less";
 @import "./variables.less";
+@import "./mixins.less";
 
 html, body {
     font-size: 14px;
 }
-
 .caption-loop(@n, @i: 1) when (@i <= @n) {
     @font-size: "font-size-h@{i}";
     h@{i} {

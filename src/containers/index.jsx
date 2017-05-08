@@ -22,9 +22,8 @@ class Index extends Component {
         const { items } = this.props;
         return (
             <div>
-                <Header />
                 <h1>Index Page</h1>
-                <Link to="/test">Test Page</Link>
+                <Link to="/sign">Sign Page</Link>
                 <div className="index-container">
                     <List items={items} />
                 </div>
