@@ -9,7 +9,7 @@ const TabPane = Tabs.TabPane;
 const Sign = () => {
     return (
         <div className="sign-container">
-            <Tabs defaultActiveKey="1">
+            <Tabs defaultActiveKey="2">
                 <TabPane tab="登 录" key="1">
                     <Login />
                 </TabPane>

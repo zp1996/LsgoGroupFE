@@ -11,7 +11,7 @@ const path = require('path'),
 const getAlias = (init = {}) => {
     const dirs = [
         'components', 'containers', 'constants', 'actions',
-        'styles', 'reducers', 'stores', 'sagas'
+        'styles', 'reducers', 'stores', 'sagas', 'helpers'
     ];
     return dirs.reduce((res, dir) => {
         const key = dir.replace(/(|^)[a-z]/, _ => _.toUpperCase());
@@ -38,6 +38,13 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
+            },
+            {
+                test: /\.(png|jpg|gif|woff|woff2)$/,
+                loaders: [
+                    'url-loader?limit=10000&name=[chunkhash:8].[name].[ext]',
+                    'image-webpack-loader?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
+                ]
             }
         ]
     },

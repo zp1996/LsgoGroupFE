@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
+import { post } from 'Helpers/EsExtend';
 import pattern from './pattern';
 
 const FormItem = Form.Item;
@@ -38,6 +39,8 @@ class Register extends Component {
         this.props.form.validateFields((err, values) => {
             if (err == null) {
                 console.log(values);
+                post('/api/register', values)
+                    .then(data => console.log(data));
             }
         });
     }
