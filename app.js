@@ -11,6 +11,7 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { readSmallFile } from 'lsgo-file';
 import store from 'Stores/prod';
+import Header from 'Components/Header';
 import routes from './src/routes';
 
 const app = new Koa(),
@@ -40,7 +41,10 @@ const matchPromise = ctx =>
             } else if (props) {
                 const html = renderToString(
                     <Provider store={store}>
-                        <RouterContext {...props} />
+                        <div>
+                            <Header />
+                            <RouterContext {...props} />
+                        </div>
                     </Provider>
                 );
                 resolve(html);
