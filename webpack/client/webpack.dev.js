@@ -11,6 +11,7 @@ const {
     resolve,
     plugins
 } = require('../webpack.default.js');
+const { target } = require(`${rootPath}/proxy.json`);
 
 module.exports = {
     entry: Object.assign(entry, {
@@ -42,7 +43,7 @@ module.exports = {
         port,
         proxy: {
             "/api": {
-                target: "http://localhost:3210",
+                target,
                 pathRewrite: { "^/api" : "" }
             }
         }

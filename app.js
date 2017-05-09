@@ -13,6 +13,7 @@ import { readSmallFile } from 'lsgo-file';
 import store from 'Stores/prod';
 import Header from 'Components/Header';
 import routes from './src/routes';
+import api from './middlewares/api'
 
 const app = new Koa(),
     staticPath = path.join(__dirname, 'dist'),
@@ -30,6 +31,8 @@ app.use(
         index: path.join(staticPath, 'index.ejs')
     })
 );
+
+app.use(api());
 
 const matchPromise = ctx =>
     new Promise((resolve, reject) => {
@@ -53,7 +56,6 @@ const matchPromise = ctx =>
             }
         });
     });
-
 app.use(async (ctx, next) => {
     try {
         const html = await matchPromise(ctx);
