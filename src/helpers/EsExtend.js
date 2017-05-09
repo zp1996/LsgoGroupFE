@@ -25,7 +25,7 @@ export const post = (url, data) => {
     .then(res => {
         if (res.status === 204) return {};
         if (res.status >= 400) {
-            res.json().then(data => ({
+            return res.json().then(data => ({
                 err: true,
                 msg: data.msg
             }));

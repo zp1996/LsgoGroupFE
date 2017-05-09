@@ -2,6 +2,7 @@ import path from 'path';
 import Koa from 'koa';
 import KoaStatic from 'koa-static';
 import render from 'koa-ejs';
+import bodyParser from 'koa-bodyparser'
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -31,6 +32,8 @@ app.use(
         index: path.join(staticPath, 'index.ejs')
     })
 );
+
+app.use(bodyParser());
 
 app.use(api());
 
