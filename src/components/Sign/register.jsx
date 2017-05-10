@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
-import { post } from 'Helpers/EsExtend';
+import Base from './base';
 import pattern from './pattern';
 
 const FormItem = Form.Item;
 const { username, email, password, repassword } = pattern;
 
-class Register extends Component {
+class Register extends Base {
     constructor(props) {
         super(props);
-        this.toRegister = this.toRegister.bind(this);
+        this.request = this.request.bind(this, '/api/register');
 
         repassword.validator = repassword.validator.bind(this);
         password.validator = (rule, value, callback) => {
@@ -35,64 +35,53 @@ class Register extends Component {
             callback();
         };
     }
-    toRegister() {
-        this.props.form.validateFields((err, values) => {
-            if (err == null) {
-                console.log(values);
-                post('/api/register', values)
-                    .then(data => console.log(data));
-            }
-        });
-    }
     render() {
-        const { form: { getFieldDecorator } } = this.props;
-        return (
-            <Form className="sign-form-container">
-                <FormItem>
-                    {getFieldDecorator('username', {
-                        rules: [{
-                            required: true,
-                            ...username
-                        }],
-                    })(
-                        <Input prefix={<Icon type="user" />} placeholder="请输入姓名" />
-                    )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('email', {
-                        rules: [{
-                            required: true,
-                            ...email
-                        }],
-                    })(
-                        <Input prefix={<Icon type="mail" />} placeholder="请输入邮箱" />
-                    )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('password', {
-                        rules: [{
-                            required: true,
-                            ...password
-                        }],
-                    })(
-                        <Input prefix={<Icon type="lock" />} placeholder="请输入密码"
-                            type="password" />
-                    )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('repassword', {
-                        rules: [{
-                            required: true,
-                            ...repassword
-                        }],
-                    })(
-                        <Input prefix={<Icon type="lock" />} placeholder="确认密码"
-                            type="password" />
-                    )}
-                </FormItem>
-                <Button type="primary" className="sign-btn" onClick={this.toRegister}>注 册</Button>
-            </Form>
-        );
+        const { getFieldDecorator } = this.props.form;
+        const children = [
+            <FormItem key="username">
+                {getFieldDecorator('username', {
+                    rules: [{
+                        required: true,
+                        ...username
+                    }],
+                })(
+                    <Input prefix={<Icon type="user" />} placeholder="请输入姓名" />
+                )}
+            </FormItem>,
+            <FormItem key="email">
+                {getFieldDecorator('email', {
+                    rules: [{
+                        required: true,
+                        ...email
+                    }],
+                })(
+                    <Input prefix={<Icon type="mail" />} placeholder="请输入邮箱" />
+                )}
+            </FormItem>,
+            <FormItem key="password">
+                {getFieldDecorator('password', {
+                    rules: [{
+                        required: true,
+                        ...password
+                    }],
+                })(
+                    <Input prefix={<Icon type="lock" />} placeholder="请输入密码"
+                        type="password" />
+                )}
+            </FormItem>,
+            <FormItem key="repassword">
+                {getFieldDecorator('repassword', {
+                    rules: [{
+                        required: true,
+                        ...repassword
+                    }],
+                })(
+                    <Input prefix={<Icon type="lock" />} placeholder="确认密码"
+                        type="password" />
+                )}
+            </FormItem>
+        ];
+        return this.layout(children, '注 册');
     }
 }
 

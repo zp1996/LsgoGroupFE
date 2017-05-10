@@ -15,7 +15,8 @@ class Index extends Component {
         super(props);
         const { dispatch } = props;
         this.popItem = () => dispatch({
-            type: POP_ITEM_ASYNC
+            type: POP_ITEM_ASYNC,
+            data: 20
         });
     }
     render() {

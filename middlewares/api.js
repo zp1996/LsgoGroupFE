@@ -5,7 +5,6 @@ const request = require('superagent'),
 const API = {
     post: (url, data) => {
         return new Promise((resolve, reject) => {
-            console.log(`${target}${url}`);
             request.post(`${target}${url}`)
                 .send(data)
                 .end((err, res) => {
