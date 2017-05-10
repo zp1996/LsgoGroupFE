@@ -3,6 +3,12 @@ require('isomorphic-fetch');
 
 export const noop = () => {};
 
+export const newObj = (obj, target) => Object.assign(
+    {},
+    obj,
+    target
+);
+
 export const objToUrl = data => {
     return Object.keys(data).reduce((url, key) => {
         return `${url}${key}=${data[key]}&`;
@@ -25,7 +31,7 @@ export const post = (url, data) => {
     .then(res => {
         if (res.status === 204) return {};
         if (res.status >= 400) {
-            return res.json().then(data => ({
+            return res.json().then(data => Promise.reject({
                 err: true,
                 msg: data.msg
             }));

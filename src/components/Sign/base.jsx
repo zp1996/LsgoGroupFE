@@ -7,11 +7,10 @@ class Base extends Component {
         super(props);
     }
     request(url) {
-        this.props.form.validateFields((err, values) => {
+        const { login, form: { validateFields } } = this.props;
+        validateFields((err, values) => {
             if (err == null) {
-                console.log(values);
-                post(url, values)
-                    .then(data => console.log(data));
+                login(url, values);
             }
         });
     }

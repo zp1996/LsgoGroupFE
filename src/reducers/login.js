@@ -1,4 +1,5 @@
 import { LOGIN, LOGIN_SUCCESS, LOGIN_FAIL } from 'Constants/actions';
+import { newObj } from 'Helpers/EsExtend';
 
 const initialState = {
     token: null,
@@ -9,15 +10,21 @@ const initialState = {
 const login = (state = initialState, action) => {
     switch(action.type) {
         case LOGIN:
-            state.pending = true;
-            return JSON.parse(JSON.stringify(state));
+            return newObj(state, {
+                pending: true,
+                error: null
+            });
         case LOGIN_SUCCESS:
-            state.pending = false;
-            return state;
+            return newObj(state, {
+                pending: false,
+                token: action.token,
+                error: null
+            });
         case LOGIN_FAIL:
-            state.pending = false;
-            state.error = action.error;
-            return JSON.parse(JSON.stringify(state));
+            return newObj(state, {
+                pending: false,
+                error: action.error
+            });
         default:
             return state;
     }
