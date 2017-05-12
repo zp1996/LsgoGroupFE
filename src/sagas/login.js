@@ -9,6 +9,9 @@ function *loginAsync(action) {
     try {
         const res = yield post(url, data);
         yield put(LoginSuccess());
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('token', res.token);
+        }
     } catch(err) {
         yield put(LoginFail(err));
     }

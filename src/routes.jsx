@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { Route, IndexRoute  } from 'react-router';
+import { Route, IndexRoute, browserHistory } from 'react-router';
+import store from 'Stores/index';
 import Index from 'Containers/index';
 import Test from 'Containers/test';
 import SignPage from 'Containers/sign';
@@ -21,9 +22,20 @@ const Container = ({children, location}) => (
     </ReactCSSTransitionGroup>
 );
 
+const checkAuth = () => {
+    const token = localStorage.getItem('token'),
+        storeToken = store.getState().login.token;
+    if (token == null || storeToken !== token) {
+        this.hasLogin = false;
+        browserHistory.push('/sign');
+    }
+};
+
 export default (
     <Route path="/" component={Container}>
-        <IndexRoute component={Index} />
+        <Route onEnter={checkAuth}>
+            <IndexRoute component={Index} />
+        </Route>
         <Route path="sign" component={SignPage} />
     </Route>
 );

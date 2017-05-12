@@ -8,7 +8,7 @@ const FormItem = Form.Item;
 class Login extends Base {
     constructor(props) {
         super(props);
-        this.request = this.request.bind(this, '/api/register');
+        this.request = this.request.bind(this, '/api/login');
     }
     render() {
         const { getFieldDecorator } = this.props.form;

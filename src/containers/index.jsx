@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import Header from 'Components/Header';
 import List from 'Components/List';
 import { POP_ITEM_ASYNC } from 'Constants/sagas';
+import Base from './base';
 
 @connect(
     state => ({

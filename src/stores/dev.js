@@ -4,12 +4,19 @@ import logger from 'redux-logger';
 import reducer from 'Reducers/index';
 import rootSaga from 'Sagas/index';
 
-const sagaMiddleware = createSagaMiddleware()
-const middlewares = [
-    logger,
-    sagaMiddleware
-];
-const enhancer = applyMiddleware(...middlewares);
+const sagaMiddleware = createSagaMiddleware();
+
+class DevStore {
+    constructor() {
+        const middlewares = [
+            logger,
+            sagaMiddleware
+        ];
+        const enhancer = applyMiddleware(...middlewares);
+        const initialState = window.__INITIAL_STATE__;
+        this.store = configureStore(reducer, initialState, enhancer);
+    }
+}
 
 function configureStore(reducer, initialState, enhancer) {
     const store = createStore(reducer, initialState, enhancer);
@@ -23,7 +30,14 @@ function configureStore(reducer, initialState, enhancer) {
     return store;
 }
 
-const initialState = window.__INITIAL_STATE__,
-    store = configureStore(reducer, initialState, enhancer);
+DevStore.getStore = function() {
+    let store = null;
+    return () => {
+        if (store == null) {
+            store = new DevStore().store;
+        }
+        return store;
+    };
+}();
 
-export default store;
+export default DevStore;
