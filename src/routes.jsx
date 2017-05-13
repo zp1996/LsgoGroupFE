@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Route, IndexRoute, browserHistory } from 'react-router';
+import { getLocalStorage } from 'Helpers/EsExtend';
 import store from 'Stores/index';
 import Index from 'Containers/index';
 import Test from 'Containers/test';
 import SignPage from 'Containers/sign';
+
+const localStorage = getLocalStorage();
 
 const Container = ({children, location}) => (
     <ReactCSSTransitionGroup
@@ -23,11 +26,24 @@ const Container = ({children, location}) => (
 );
 
 const checkAuth = () => {
+    if (localStorage == null) return;
     const token = localStorage.getItem('token'),
         storeToken = store.getState().login.token;
     if (token == null || storeToken !== token) {
-        this.hasLogin = false;
         browserHistory.push('/sign');
+    }
+};
+
+const hasLogin = () => {
+    if (localStorage == null) return;
+    const token = localStorage.getItem('token');
+    let {
+        routing: { locationBeforeTransitions: { pathname } },
+        login: { token: storeToken }
+    } = store.getState();
+    pathname = pathname === '/sign' ? '/' : pathname;
+    if (token != null && storeToken === token) {
+        browserHistory.push(pathname);
     }
 };
 
@@ -36,6 +52,6 @@ export default (
         <Route onEnter={checkAuth}>
             <IndexRoute component={Index} />
         </Route>
-        <Route path="sign" component={SignPage} />
+        <Route path="sign" component={SignPage} onEnter={hasLogin} />
     </Route>
 );

@@ -11,10 +11,11 @@ import { RouterContext, match } from 'react-router';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { readSmallFile } from 'lsgo-file';
-import store from 'Stores/prod';
+import store from 'Stores/index';
 import Header from 'Components/Header';
 import routes from './src/routes';
-import api from './middlewares/api'
+import api from './middlewares/api';
+import auth from './middlewares/auth';
 
 const app = new Koa(),
     staticPath = path.join(__dirname, 'dist'),
@@ -36,6 +37,8 @@ app.use(
 app.use(bodyParser());
 
 app.use(api());
+
+app.use(auth());
 
 const matchPromise = ctx =>
     new Promise((resolve, reject) => {

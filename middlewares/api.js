@@ -1,20 +1,14 @@
-const request = require('superagent'),
-    { target } = require('../proxy.json'),
-    apiRE = /^\/api(\/\w+)/;
+import { API } from './utils';
 
-const API = {
-    post: (url, data) => {
-        return new Promise((resolve, reject) => {
-            request.post(`${target}${url}`)
-                .send(data)
-                .end((err, res) => {
-                    if (err == null) {
-                        resolve(res.body);
-                    } else {
-                        reject(res);
-                    }
-                })
-        });
+const apiRE = /^\/api(\/\w+)/;
+const handleError = {
+    400: (ctx, err) => {
+        ctx.status = 400;
+        ctx.body = JSON.parse(err.text);
+    },
+    500: (ctx) => {
+        ctx.status = 500;
+        ctx.body = { msg: '服务器发生错误！' };
     }
 };
 // 添加超时时间为3.5秒
@@ -39,14 +33,16 @@ export default () => async (ctx, next) => {
     } else {
         try {
             const res = await API[method.toLowerCase()](matches[1], body);
+            if (res && res.token) {
+                ctx.cookies.set('token', res.token);
+            }
             ctx.body = res;
         } catch(err) {
             if (err === 'timeout') {
                 ctx.status = 502;
                 ctx.body = { msg: '服务端繁忙，请稍后再试！' };
             } else {
-                ctx.status = 500;
-                ctx.body = { err };
+                handleError[err.status || 500](ctx, err);
             }
         }
     }

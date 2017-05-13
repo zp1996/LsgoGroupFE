@@ -26,6 +26,7 @@ export const post = (url, data) => {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: objToUrl(data),
+        credentials: 'include',
         mode: 'cors'
     })
     .then(res => {
@@ -38,4 +39,12 @@ export const post = (url, data) => {
         }
         return res.json();
     });
+};
+
+export const getLocalStorage = () => {
+    if (typeof window === 'undefined') {
+        return null;
+    } else {
+        return window.localStorage;
+    }
 };

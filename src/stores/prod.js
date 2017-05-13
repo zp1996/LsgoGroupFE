@@ -13,14 +13,14 @@ class ProdStore {
     }
 }
 
-prodStore.setInstance = function() {
+ProdStore.getStore = function() {
     let store = null;
     return () => {
         if (store == null) {
             store = new ProdStore().store;
         }
         return store;
-    }
+    };
 }();
 
-export default prodStore;
+export default ProdStore;
