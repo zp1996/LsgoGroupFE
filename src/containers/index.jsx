@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Header from 'Components/Header';
 import List from 'Components/List';
+import WebMenu from 'Components/WebMenu';
 import { POP_ITEM_ASYNC } from 'Constants/sagas';
-import Base from './base';
 
 @connect(
     state => ({
@@ -24,12 +24,19 @@ class Index extends Component {
         const { items } = this.props;
         return (
             <div>
-                <h1>Index Page</h1>
-                <Link to="/sign">Sign Page</Link>
-                <div className="index-container">
-                    <List items={items} />
+                <div className="web-menu">
+                    <WebMenu />
                 </div>
-                <button onClick={this.popItem}>删除元素</button>
+                <div className="web-wrapper">
+                    <div className="web-main">
+                        <h1>Index Page</h1>
+                        <Link to="/sign">Sign Page</Link>
+                        <div className="index-container">
+                            <List items={items} />
+                        </div>
+                        <button onClick={this.popItem}>删除元素</button>
+                    </div>
+                </div>
             </div>
         );
     }

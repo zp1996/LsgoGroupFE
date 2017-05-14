@@ -4,7 +4,6 @@ import { Route, IndexRoute, browserHistory } from 'react-router';
 import { getLocalStorage } from 'Helpers/EsExtend';
 import store from 'Stores/index';
 import Index from 'Containers/index';
-import Test from 'Containers/test';
 import SignPage from 'Containers/sign';
 
 const localStorage = getLocalStorage();

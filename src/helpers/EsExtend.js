@@ -41,10 +41,12 @@ export const post = (url, data) => {
     });
 };
 
-export const getLocalStorage = () => {
+export const getLocalStorage = function() {
+    let res = null;
     if (typeof window === 'undefined') {
-        return null;
+        res = null;
     } else {
-        return window.localStorage;
+        res = window.localStorage;
     }
-};
+    return () => res;
+}();
