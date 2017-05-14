@@ -12,6 +12,7 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { readSmallFile } from 'lsgo-file';
 import store from 'Stores/index';
+import { LoginSuccess } from 'Actions/login';
 import Header from 'Components/Header';
 import routes from './src/routes';
 import api from './middlewares/api';
@@ -63,6 +64,10 @@ const matchPromise = ctx =>
         });
     });
 app.use(async (ctx, next) => {
+    const token = ctx.cookies.get('token');
+    if (token) {
+        store.dispatch(LoginSuccess(token));
+    }
     try {
         const html = await matchPromise(ctx);
         await ctx.render('index', {
