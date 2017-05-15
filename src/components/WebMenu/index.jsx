@@ -13,22 +13,28 @@ const SubMenuTitle = (icon, title) => (
 
 const getOther = {
     admin: () => (
-        <SubMenu key="team" title={SubMenuTitle("team", "实验室管理")}>
-            <Item>小组管理</Item>
+        <SubMenu key="team" title={SubMenuTitle("code-o", "实验室管理")}>
+            <Item key="team-handle">
+                <Link to="/team">小组管理</Link>
+            </Item>
+            <Item>图文申请</Item>
             <Item>小组任务</Item>
         </SubMenu>
     ),
     grouper: () => (
-        <SubMenu key="group" title={SubMenuTitle("team", "小组管理")}>
+        <SubMenu key="group" title={SubMenuTitle("code-o", "小组管理")}>
             <Item>分配任务</Item>
         </SubMenu>
     ),
     member: () => null
 };
 
-const WebMenu = () => {
+const WebMenu = ({ select, open }) => {
     return (
-        <Menu style={{ width: 240 }} mode="inline">
+        <Menu style={{ width: 240 }} mode="inline"
+            defaultSelectedKeys={[select]}
+            defaultOpenKeys={['member', 'task', 'group', 'team']}
+        >
             <SubMenu key="member" title={SubMenuTitle("team", "实验室人员")}>
                 <ItemGroup key="group" title="各小组成员">
                     <Item key="web">Web 小组</Item>
@@ -46,12 +52,19 @@ const WebMenu = () => {
                 <Item key="share">每周分享资料</Item>
             </SubMenu>
             {
-                getOther['grouper']()
+                getOther['admin']()
             }
-            <SubMenu key="own" title={SubMenuTitle("user", "月总结")}>
+            <SubMenu key="own" title={SubMenuTitle("book", "月总结")}>
                 <Item>提交月总结</Item>
+                <Item>图文投稿</Item>
                 <Item>团队成员月总结</Item>
             </SubMenu>
+            <Item key="rule">
+                <Link to="rule">
+                    <Icon type="solution" />
+                    <span>团队制度</span>
+                </Link>
+            </Item>
         </Menu>
     );
 };

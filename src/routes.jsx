@@ -3,8 +3,10 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Route, IndexRoute, browserHistory } from 'react-router';
 import { getLocalStorage } from 'Helpers/EsExtend';
 import store from 'Stores/index';
-import Index from 'Containers/index';
+import IndexPage from 'Containers/index';
 import SignPage from 'Containers/sign';
+import TeamPage from 'Containers/team';
+import RulePage from 'Containers/rule';
 
 const localStorage = getLocalStorage();
 
@@ -17,9 +19,7 @@ const Container = ({children, location}) => (
             transitionLeaveTimeout={300}
         >
         <div key={location.pathname} className="router-container">
-            <div className="main-container">
-                {children}
-            </div>
+            {children}
         </div>
     </ReactCSSTransitionGroup>
 );
@@ -49,7 +49,9 @@ const hasLogin = () => {
 export default (
     <Route path="/" component={Container}>
         <Route onEnter={checkAuth}>
-            <IndexRoute component={Index} />
+            <Route path="team" component={TeamPage} />
+            <Route path="rule" component={RulePage} />
+            <IndexRoute component={IndexPage} />
         </Route>
         <Route path="sign" component={SignPage} onEnter={hasLogin} />
     </Route>

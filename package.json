@@ -11,7 +11,7 @@
     "dev": "webpack-dev-server --config ./webpack/client/webpack.dev.js --open",
     "prod-build": "npm run prod-dll && webpack --config ./webpack/client/webpack.prod.js",
     "prod": "npm run prod-build && node prod.js",
-    "server": "webpack --config ./webpack/server/webpack.prod.js && node ssr.js"
+    "server": "npm run prod-build && webpack --config ./webpack/server/webpack.prod.js && node ssr.js"
   },
   "repository": {
     "type": "git",

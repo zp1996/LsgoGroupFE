@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+@import "../../styles/variables.less";
+
+.rule {
+    @big: 3.5rem;
+    @middle: 2.5rem;
+    @small: 0.8rem;
+    padding: @small @big;
+    &-title {
+        text-align: center;
+        margin-bottom: @middle;
+    }
+    &-unique:last-child {
+        margin-top: @big;
+    }
+    &-list {
+        margin-left: @big;
+        list-style-type: circle;
+        li {
+            margin: @small 0px;
+            font-size: 1.2rem;
+        }
+    }
+}

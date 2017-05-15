@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import Header from 'Components/Header';
 import List from 'Components/List';
-import WebMenu from 'Components/WebMenu';
 import { POP_ITEM_ASYNC } from 'Constants/sagas';
+import Layout from './layout';
 
 @connect(
     state => ({
-        items: state.items
+        items: state.items,
+        url: state.routing.locationBeforeTransitions.pathname
     })
 )
-class Index extends Component {
+class IndexPage extends Layout {
     constructor(props) {
         super(props);
         const { dispatch } = props;
@@ -21,25 +21,20 @@ class Index extends Component {
         });
     }
     render() {
-        const { items } = this.props;
-        return (
-            <div>
-                <div className="web-menu">
-                    <WebMenu />
-                </div>
-                <div className="web-wrapper">
-                    <div className="web-main">
-                        <h1>Index Page</h1>
-                        <Link to="/sign">Sign Page</Link>
-                        <div className="index-container">
-                            <List items={items} />
-                        </div>
-                        <button onClick={this.popItem}>删除元素</button>
+        const { items, url } = this.props;
+        return this.layout(
+            (
+                <div>
+                    <h1>Index Page</h1>
+                    <Link to="/sign">Sign Page</Link>
+                    <div className="index-container">
+                        <List items={items} />
                     </div>
+                    <button onClick={this.popItem}>删除元素</button>
                 </div>
-            </div>
+            ), url
         );
     }
 }
 
-export default Index;
+export default IndexPage;
