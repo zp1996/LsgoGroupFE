@@ -60,7 +60,7 @@ const WebMenu = ({ select, open }) => {
                 <Item>团队成员月总结</Item>
             </SubMenu>
             <Item key="rule">
-                <Link to="rule">
+                <Link to="/rule">
                     <Icon type="solution" />
                     <span>团队制度</span>
                 </Link>

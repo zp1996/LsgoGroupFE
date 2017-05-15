@@ -15,8 +15,22 @@ export const objToUrl = data => {
     }, '').slice(0, -1);
 };
 
-export const get = () => {
+const handleRes = res => {
+    if (res.status === 204) return {};
+    if (res.status >= 400) {
+        return res.json().then(data => Promise.reject({
+            err: true,
+            msg: data.msg
+        }));
+    }
+    return res.json();
+};
 
+export const get = (url) => {
+    return fetch(url, {
+        credentials: 'include',
+        mode: 'cors'
+    }).then(handleRes);
 };
 
 export const post = (url, data) => {
@@ -28,17 +42,7 @@ export const post = (url, data) => {
         body: objToUrl(data),
         credentials: 'include',
         mode: 'cors'
-    })
-    .then(res => {
-        if (res.status === 204) return {};
-        if (res.status >= 400) {
-            return res.json().then(data => Promise.reject({
-                err: true,
-                msg: data.msg
-            }));
-        }
-        return res.json();
-    });
+    }).then(handleRes);
 };
 
 export const getLocalStorage = function() {

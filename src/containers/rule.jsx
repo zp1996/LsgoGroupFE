@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Rule from 'Components/Rule';
 import Layout from './layout';
 
@@ -18,7 +19,7 @@ const rules = [{
         '参与维护团队微信公众平台，每周帮忙搜集至少一篇娱乐性质的优质IT文章',
         '参与团队重要项目的开发'
     ]
-}]
+}];
 
 class RulePage extends Layout {
     constructor(props) {
@@ -30,5 +31,5 @@ class RulePage extends Layout {
         );
     }
 }
-
-export default RulePage;
+// 防止切换页面时产生不必要re-render
+export default connect()(RulePage);
