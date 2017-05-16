@@ -5,6 +5,17 @@ const info = msg => {
     message.error(msg);
 };
 
+const getColumns = columns => {
+    return columns.map(column => {
+        const { 0: key } = Object.keys(column);
+        return {
+            title: column[key],
+            dataIndex: key,
+            key
+        };
+    });
+};
+
 class WebTable extends Component {
     constructor(props) {
         super(props);
@@ -15,7 +26,7 @@ class WebTable extends Component {
     render() {
         const { loading, columns } = this.props;
         return (
-            <Table columns={columns}
+            <Table columns={getColumns(columns)}
                 loading={loading} />
         );
     }
