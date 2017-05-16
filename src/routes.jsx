@@ -10,7 +10,7 @@ import RulePage from 'Containers/rule';
 
 const localStorage = getLocalStorage();
 
-const Container = ({children, location}) => (
+const Container = ({children}) => (
     <ReactCSSTransitionGroup
             component="div"
             className="tranistion-wrapper"
@@ -18,7 +18,7 @@ const Container = ({children, location}) => (
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}
         >
-        <div key={location.pathname} className="router-container">
+        <div className="router-container">
             {children}
         </div>
     </ReactCSSTransitionGroup>

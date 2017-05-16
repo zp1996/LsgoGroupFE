@@ -22,9 +22,11 @@ const team = (state = initialState, action) => {
         case TEAM_GET_FAIL:
             return newObj(state, {
                 pending: false,
-                error: data.error;
+                error: data.error
             });
         default:
             return state;
     }
 };
+
+export default team;

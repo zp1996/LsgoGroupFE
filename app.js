@@ -8,8 +8,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { RouterContext, match } from 'react-router';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
 import { readSmallFile } from 'lsgo-file';
 import store from 'Stores/index';
 import { LoginSuccess } from 'Actions/login';
@@ -49,6 +47,10 @@ const matchPromise = ctx =>
             } else if (redirect) {
                 console.log('redirect');
             } else if (props) {
+                // 设置路由信息
+                store.getState().routing.locationBeforeTransitions = {
+                    pathname: ctx.url
+                };
                 const html = renderToString(
                     <Provider store={store}>
                         <div>

@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 import { take, put, takeEvery } from 'redux-saga/effects';
 import { Login, LoginSuccess, LoginFail } from 'Actions/login';
 import { post, getLocalStorage } from 'Helpers/EsExtend';
@@ -7,10 +8,11 @@ function *loginAsync(action) {
     const { data, url } = action;
     yield put(Login());
     try {
-        const res = yield post(url, data),
+        const { token } = yield post(url, data),
             localStorage = getLocalStorage();
-        yield put(LoginSuccess());
-        localStorage && localStorage.setItem('token', res.token);
+        yield put(LoginSuccess(token));
+        localStorage && localStorage.setItem('token', token);
+        browserHistory.push('/');
     } catch(err) {
         yield put(LoginFail(err));
     }
