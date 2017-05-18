@@ -19,7 +19,7 @@ const BaseAPI = (method, key) => (url, token, data) => {
             }
         });
     });
-}
+};
 
 export const API = {
     post: BaseAPI('post', 'send'),

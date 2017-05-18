@@ -1,4 +1,9 @@
-import { TEAM_GET, TEAM_GET_SUCCESS, TEAM_GET_FAIL } from 'Constants/actions';
+import {
+    TEAM_GET,
+    TEAM_GET_SUCCESS,
+    TEAM_GET_FAIL,
+    TEAM_ERR_REMOVE
+} from 'Constants/actions';
 import { newObj } from 'Helpers/EsExtend';
 
 const initialState = {
@@ -22,7 +27,11 @@ const team = (state = initialState, action) => {
         case TEAM_GET_FAIL:
             return newObj(state, {
                 pending: false,
-                error: data.error
+                error: action.error
+            });
+        case TEAM_ERR_REMOVE:
+            return newObj(state, {
+                error: null
             });
         default:
             return state;

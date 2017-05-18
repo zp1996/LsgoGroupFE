@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Table, message } from 'antd';
 
-const info = msg => {
+const { Column } = Table;
+
+const err = msg => {
     message.error(msg);
 };
 
@@ -23,11 +25,23 @@ class WebTable extends Component {
     componentWillMount() {
         this.props.getData();
     }
+    componentDidUpdate() {
+        const { error, removeErr } = this.props;
+        if (error) {
+            err(error.msg);
+            removeErr();
+        }
+    }
     render() {
-        const { loading, columns } = this.props;
+        const { loading, columns, data } = this.props;
         return (
-            <Table columns={getColumns(columns)}
-                loading={loading} />
+            <Table loading={loading} dataSource={data}>
+                {
+                    getColumns(columns).map(col => (
+                        <Column {...col} />
+                    ))
+                }
+            </Table>
         );
     }
 }

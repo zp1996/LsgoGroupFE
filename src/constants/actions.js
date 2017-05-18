@@ -8,3 +8,5 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const TEAM_GET = 'TEAM_GET';
 export const TEAM_GET_SUCCESS = 'TEAM_GET_SUCCESS';
 export const TEAM_GET_FAIL = 'TEAM_GET_FAIL';
+export const TEAM_ERR_REMOVE = 'TEAM_ERR_REMOVE';
+export const TEAM_ADD = 'TEAM_ADD';
