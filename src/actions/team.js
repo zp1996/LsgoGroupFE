@@ -31,8 +31,9 @@ export const Add = () => ({
     type: TEAM_ADD
 });
 
-export const AddSuccess = () => ({
-    type: TEAM_ADD_SUCCESS
+export const AddSuccess = team => ({
+    type: TEAM_ADD_SUCCESS,
+    team
 });
 
 export const AddFail = (index, err) => ({

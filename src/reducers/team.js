@@ -25,8 +25,10 @@ const team = (state = initialState, action) => {
                 pending: true
             });
         case TEAM_ADD_SUCCESS:
+            state.data.push(action.team);
             return newObj(state, {
-                pending: false
+                pending: false,
+                data: state.data
             });
         case TEAM_ADD_FAIL:
             const { data } = state,

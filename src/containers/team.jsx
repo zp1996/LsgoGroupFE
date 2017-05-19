@@ -21,7 +21,7 @@ class TeamPage extends Layout {
         { number: '小组人数' },
         { leader: '小组组长' },
         { mentor: '小组副组长' },
-        { handle: '操作' }
+        { handle: '操作', render: text => console.log(text) }
     ]
     constructor(props) {
         super(props);
@@ -37,6 +37,12 @@ class TeamPage extends Layout {
         this.removeErr = () => dispatch(RemoveFail());
         this.showModal = () => dispatch(ChangeModal(true));
         this.hideModal = () => dispatch(ChangeModal(false));
+    }
+    componentWillReceiveProps(nextProps, nextState) {
+        if (nextProps.team.modal === false
+            && this.props.team.modal === true) {
+            this.setState({ groupname: '' });
+        }
     }
     addGroup() {
         const { groupname } = this.state;
@@ -75,7 +81,15 @@ class TeamPage extends Layout {
                                     onChange={this.changeGroupName} />
                             </div>
                             <div className="team-name-item">
-                                <label>小组组长：</label>
+                                <label>组长：</label>
+                                <Select defaultValue="none" style={{ width: 120 }}>
+                                    <Option value="none">暂无</Option>
+                                    <Option value="lucy">Lucy</Option>
+                                    <Option value="Yiminghe">yiminghe</Option>
+                                </Select>
+                            </div>
+                            <div className="team-name-item">
+                                <label>副组长：</label>
                                 <Select defaultValue="none" style={{ width: 120 }}>
                                     <Option value="none">暂无</Option>
                                     <Option value="lucy">Lucy</Option>

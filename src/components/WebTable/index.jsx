@@ -10,7 +10,10 @@ const getColumns = columns => {
         return {
             title: column[key],
             dataIndex: key,
-            key
+            key,
+            render: column.render || (text => {
+                return text == null ? '暂无' : text;
+            })
         };
     });
 };

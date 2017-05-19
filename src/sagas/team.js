@@ -32,7 +32,7 @@ function *teamAddAsync(action) {
         const res = yield post('/api/team/add', {
             name: data
         });
-        yield put(AddSuccess());
+        yield put(AddSuccess(res));
         localStorage.setItem('teams', teams.join('.'));
     } catch(err) {
         yield put(AddFail(index, err));
