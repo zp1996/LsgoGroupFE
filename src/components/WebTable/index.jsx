@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Table, message } from 'antd';
+import { showErr } from 'Helpers/component';
 
 const { Column } = Table;
-
-const err = msg => {
-    message.error(msg);
-};
 
 const getColumns = columns => {
     return columns.map(column => {
@@ -28,7 +25,7 @@ class WebTable extends Component {
     componentDidUpdate() {
         const { error, removeErr } = this.props;
         if (error) {
-            err(error.msg);
+            showErr(error);
             removeErr();
         }
     }

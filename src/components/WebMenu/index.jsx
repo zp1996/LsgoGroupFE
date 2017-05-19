@@ -33,7 +33,7 @@ const WebMenu = ({ select, open }) => {
     return (
         <Menu style={{ width: 240 }} mode="inline"
             defaultSelectedKeys={[select]}
-            defaultOpenKeys={['member', 'task', 'group', 'team']}
+            defaultOpenKeys={['task', 'group', 'team']}
         >
             <SubMenu key="member" title={SubMenuTitle("team", "实验室人员")}>
                 <ItemGroup key="group" title="各小组成员">
