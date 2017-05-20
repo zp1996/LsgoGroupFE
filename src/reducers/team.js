@@ -6,7 +6,9 @@ import {
     TEAM_ADD,
     TEAM_CHANGE_MODAL,
     TEAM_ADD_SUCCESS,
-    TEAM_ADD_FAIL
+    TEAM_ADD_FAIL,
+    TEAM_DEL,
+    TEAM_DEL_FAIL
 } from 'Constants/actions';
 import { newObj } from 'Helpers/EsExtend';
 
@@ -31,13 +33,9 @@ const team = (state = initialState, action) => {
                 data: state.data
             });
         case TEAM_ADD_FAIL:
-            const { data } = state,
-                { index, err } = action;
-            data.splice(index, 1);
             return newObj(state, {
                 pending: false,
-                data,
-                error: err
+                error: action.err
             });
         case TEAM_CHANGE_MODAL:
             return newObj(state, {
@@ -57,6 +55,18 @@ const team = (state = initialState, action) => {
         case TEAM_ERR_REMOVE:
             return newObj(state, {
                 error: null
+            });
+        case TEAM_DEL:
+            const data = state.data.filter(
+                team => team.id !== action.id
+            );
+            return newObj(state, {
+                data
+            });
+        case TEAM_DEL_FAIL:
+            return newObj(state, {
+                data: action.data,
+                error: action.err
             });
         default:
             return state;

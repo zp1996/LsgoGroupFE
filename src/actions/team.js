@@ -6,7 +6,9 @@ import {
     TEAM_ADD,
     TEAM_CHANGE_MODAL,
     TEAM_ADD_SUCCESS,
-    TEAM_ADD_FAIL
+    TEAM_ADD_FAIL,
+    TEAM_DEL,
+    TEAM_DEL_FAIL
  } from 'Constants/actions';
 
 export const Get = () => ({
@@ -36,13 +38,23 @@ export const AddSuccess = team => ({
     team
 });
 
-export const AddFail = (index, err) => ({
+export const AddFail = err => ({
     type: TEAM_ADD_FAIL,
-    index,
     err
 });
 
 export const ChangeModal = modal => ({
     type: TEAM_CHANGE_MODAL,
     modal
+});
+
+export const Del = id => ({
+    type: TEAM_DEL,
+    id
+});
+
+export const DelFail = (data, err) => ({
+    type: TEAM_DEL_FAIL,
+    data,
+    err
 });

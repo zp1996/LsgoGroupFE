@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Button, Modal, Input, Select } from 'antd';
 import WebTable from 'Components/WebTable';
 import { showErr } from 'Helpers/component';
-import { RemoveFail, ChangeModal } from 'Actions/team';
-import { TEAM_GET_ASYNC, TEAM_ADD_ASYNC } from 'Constants/sagas';
+import { RemoveFail, ChangeModal, Del } from 'Actions/team';
+import { TEAM_GET_ASYNC, TEAM_ADD_ASYNC, TEAM_DEL_ASYNC } from 'Constants/sagas';
 import Layout from './layout';
 
 const after = '小组',
@@ -21,7 +21,7 @@ class TeamPage extends Layout {
         { number: '小组人数' },
         { leader: '小组组长' },
         { mentor: '小组副组长' },
-        { handle: '操作', render: text => console.log(text) }
+        { handle: '操作' }
     ]
     constructor(props) {
         super(props);
@@ -37,12 +37,26 @@ class TeamPage extends Layout {
         this.removeErr = () => dispatch(RemoveFail());
         this.showModal = () => dispatch(ChangeModal(true));
         this.hideModal = () => dispatch(ChangeModal(false));
+        this.del = id => dispatch({ type: TEAM_DEL_ASYNC, id });
+
+        const { columns } = TeamPage;
+        columns[columns.length - 1].render = this.renderHandle.bind(this);
     }
     componentWillReceiveProps(nextProps, nextState) {
         if (nextProps.team.modal === false
             && this.props.team.modal === true) {
             this.setState({ groupname: '' });
         }
+    }
+    renderHandle(text, data) {
+        const { id } = data,
+            { del, changeName } = this;
+        return (
+            <span className="handles">
+                <a href="javascript: void(0)" onClick={del.bind(this, id)}>删除</a>
+                <a href="javascript: void(0)" onClick={changeName}>编辑小组</a>
+            </span>
+        );
     }
     addGroup() {
         const { groupname } = this.state;
