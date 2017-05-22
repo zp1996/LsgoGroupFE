@@ -1,14 +1,9 @@
 import {
-    TEAM_GET,
-    TEAM_GET_SUCCESS,
-    TEAM_GET_FAIL,
-    TEAM_ERR_REMOVE,
-    TEAM_ADD,
-    TEAM_CHANGE_MODAL,
-    TEAM_ADD_SUCCESS,
-    TEAM_ADD_FAIL,
-    TEAM_DEL,
-    TEAM_DEL_FAIL
+    TEAM_GET, TEAM_GET_SUCCESS, TEAM_GET_FAIL,
+    TEAM_ERR_REMOVE, TEAM_CHANGE_MODAL,
+    TEAM_ADD, TEAM_ADD_SUCCESS, TEAM_ADD_FAIL,
+    TEAM_DEL, TEAM_DEL_FAIL,
+    TEAM_UPDATE_SUCCESS
  } from 'Constants/actions';
 
 export const Get = () => ({
@@ -57,4 +52,9 @@ export const DelFail = (data, err) => ({
     type: TEAM_DEL_FAIL,
     data,
     err
+});
+
+export const UpdateSuccess = team => ({
+    type: TEAM_UPDATE_SUCCESS,
+    team
 });

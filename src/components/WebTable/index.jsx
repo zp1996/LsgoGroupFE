@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, message } from 'antd';
 import { showErr } from 'Helpers/component';
+import pureRender from 'pure-render-decorator';
 
 const { Column } = Table;
 
@@ -18,6 +19,7 @@ const getColumns = columns => {
     });
 };
 
+@pureRender
 class WebTable extends Component {
     constructor(props) {
         super(props);

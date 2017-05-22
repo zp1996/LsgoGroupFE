@@ -29,7 +29,7 @@ const getOther = {
     member: () => null
 };
 
-const WebMenu = ({ select, open }) => {
+const WebMenu = ({ select, groups }) => {
     return (
         <Menu style={{ width: 240 }} mode="inline"
             defaultSelectedKeys={[select]}
@@ -37,19 +37,22 @@ const WebMenu = ({ select, open }) => {
         >
             <SubMenu key="member" title={SubMenuTitle("team", "实验室人员")}>
                 <ItemGroup key="group" title="各小组成员">
-                    <Item key="web">Web 小组</Item>
-                    <Item key="C#">C# 小组</Item>
-                    <Item key="mat">Matlab 小组</Item>
+                    {
+                        groups && groups.map(group => (
+                            <Item key={group.id}>{group.name}</Item>
+                        ))
+                    }
                 </ItemGroup>
                 <ItemGroup key="other" title="未分组成员 && 未达标成员">
                     <Item key="no-group">未分组成员</Item>
                     <Item key="no-good">未达标成员</Item>
+                    <Item key="no-in-team">被淘汰成员</Item>
                 </ItemGroup>
             </SubMenu>
             <SubMenu key="task" title={SubMenuTitle("schedule", "实验室任务")}>
                 <Item key="code">代码/工程</Item>
                 <Item key="alg">算法</Item>
-                <Item key="share">每周分享资料</Item>
+                <Item key="share">本周分享</Item>
             </SubMenu>
             {
                 getOther['admin']()

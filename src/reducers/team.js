@@ -1,15 +1,10 @@
 import {
-    TEAM_GET,
-    TEAM_GET_SUCCESS,
-    TEAM_GET_FAIL,
-    TEAM_ERR_REMOVE,
-    TEAM_ADD,
-    TEAM_CHANGE_MODAL,
-    TEAM_ADD_SUCCESS,
-    TEAM_ADD_FAIL,
-    TEAM_DEL,
-    TEAM_DEL_FAIL
-} from 'Constants/actions';
+    TEAM_GET, TEAM_GET_SUCCESS, TEAM_GET_FAIL,
+    TEAM_ERR_REMOVE, TEAM_CHANGE_MODAL,
+    TEAM_ADD, TEAM_ADD_SUCCESS, TEAM_ADD_FAIL,
+    TEAM_DEL, TEAM_DEL_FAIL,
+    TEAM_UPDATE_SUCCESS
+ } from 'Constants/actions';
 import { newObj } from 'Helpers/EsExtend';
 
 const initialState = {
@@ -67,6 +62,11 @@ const team = (state = initialState, action) => {
             return newObj(state, {
                 data: action.data,
                 error: action.err
+            });
+        case TEAM_UPDATE_SUCCESS:
+            console.log(action.data);
+            return newObj(state, {
+
             });
         default:
             return state;

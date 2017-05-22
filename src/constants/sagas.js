@@ -5,3 +5,4 @@ export const LOGIN_ASYNC = `${LOGIN}_Async`;
 export const TEAM_GET_ASYNC = `${TEAM_GET}_Async`;
 export const TEAM_ADD_ASYNC = `${TEAM_ADD}_Async`;
 export const TEAM_DEL_ASYNC = `${TEAM_DEL}_Async`;
+export const TEAM_UPDATE_ASYNC = 'TEAM_UPDATE_ASYNC';

@@ -32,4 +32,8 @@ class RulePage extends Layout {
     }
 }
 // 防止切换页面时产生不必要re-render
-export default connect()(RulePage);
+export default connect(
+    state => ({
+        team: state.team
+    })
+)(RulePage);

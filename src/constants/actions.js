@@ -15,3 +15,4 @@ export const TEAM_ADD_FAIL = 'TEAM_ADD_FAIL';
 export const TEAM_DEL = 'TEAM_DEL';
 export const TEAM_DEL_FAIL = 'TEAM_DEL_FAIL';
 export const TEAM_CHANGE_MODAL = 'TEAM_CHANGE_MODAL';
+export const TEAM_UPDATE_SUCCESS = 'TEAM_UPDATE_SUCCESS';
