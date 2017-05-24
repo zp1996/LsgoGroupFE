@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Rule from 'Components/Rule';
+import { rule } from 'Constants/menu';
 import Layout from './layout';
 
 const rules = [{
@@ -27,7 +28,7 @@ class RulePage extends Layout {
     }
     render() {
         return this.layout(
-            <Rule rules={rules} />, 'rule'
+            <Rule rules={rules} />, { select: rule }
         );
     }
 }

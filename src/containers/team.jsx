@@ -9,6 +9,7 @@ import {
     TEAM_GET_ASYNC, TEAM_ADD_ASYNC,
     TEAM_DEL_ASYNC, TEAM_UPDATE_ASYNC
 } from 'Constants/sagas';
+import { teamHandle } from 'Constants/menu';
 import Layout from './layout';
 
 const after = '小组',
@@ -192,8 +193,7 @@ class TeamPage extends Layout {
                 <WebTable getData={this.getData} data={data} error={error}
                     loading={pending} columns={TeamPage.columns}
                     removeErr={this.removeErr} />
-            </div>,
-            'team-handle'
+            </div>, teamHandle
         );
     }
 }

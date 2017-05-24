@@ -7,18 +7,19 @@ import IndexPage from 'Containers/index';
 import SignPage from 'Containers/sign';
 import TeamPage from 'Containers/team';
 import RulePage from 'Containers/rule';
+import SubmitPage from 'Containers/submit';
 
 const localStorage = getLocalStorage();
 
-const Container = ({children}) => (
+const Container = ({ children, location }) => (
     <ReactCSSTransitionGroup
             component="div"
             className="tranistion-wrapper"
-            transitionName="route"
-            transitionEnterTimeout={300}
-            transitionLeaveTimeout={300}
+            transitionName="router"
+            transitionEnterTimeout={600}
+            transitionLeaveTimeout={100}
         >
-        <div className="router-container">
+        <div key={location.pathname} className="router-container">
             {children}
         </div>
     </ReactCSSTransitionGroup>
@@ -48,11 +49,10 @@ const hasLogin = () => {
 
 export default (
     <Route path="/" component={Container}>
-        <Route onEnter={checkAuth}>
-            <Route path="team" component={TeamPage} />
-            <Route path="rule" component={RulePage} />
-            <IndexRoute component={IndexPage} />
-        </Route>
+        <Route path="team" component={TeamPage} />
+        <Route path="rule" component={RulePage} />
+        <Route path="submit" component={SubmitPage} />
         <Route path="sign" component={SignPage} onEnter={hasLogin} />
+        <IndexRoute component={IndexPage} />
     </Route>
 );

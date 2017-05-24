@@ -15,6 +15,7 @@ import Header from 'Components/Header';
 import routes from './src/routes';
 import api from './middlewares/api';
 import auth from './middlewares/auth';
+import redis from './redis';
 
 const app = new Koa(),
     staticPath = path.join(__dirname, 'dist'),

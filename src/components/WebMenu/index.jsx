@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Menu, Icon } from 'antd';
+import {
+    task, code, alg, share,
+    team, teamHandle,
+    other, noGroup, noGood, noInTeam,
+    rule,
+    own, submit
+} from 'Constants/menu';
 
 const { Item, ItemGroup, SubMenu } = Menu;
 
@@ -13,8 +20,8 @@ const SubMenuTitle = (icon, title) => (
 
 const getOther = {
     admin: () => (
-        <SubMenu key="team" title={SubMenuTitle("code-o", "实验室管理")}>
-            <Item key="team-handle">
+        <SubMenu key={team} title={SubMenuTitle("code-o", "实验室管理")}>
+            <Item {...teamHandle}>
                 <Link to="/team">小组管理</Link>
             </Item>
             <Item>图文申请</Item>
@@ -29,11 +36,11 @@ const getOther = {
     member: () => null
 };
 
-const WebMenu = ({ select, groups }) => {
+const WebMenu = ({ select, open, groups }) => {
     return (
         <Menu style={{ width: 240 }} mode="inline"
             defaultSelectedKeys={[select]}
-            defaultOpenKeys={['task', 'group', 'team']}
+            defaultOpenKeys={['task', open]}
         >
             <SubMenu key="member" title={SubMenuTitle("team", "实验室人员")}>
                 <ItemGroup key="group" title="各小组成员">
@@ -43,26 +50,28 @@ const WebMenu = ({ select, groups }) => {
                         ))
                     }
                 </ItemGroup>
-                <ItemGroup key="other" title="未分组成员 && 未达标成员">
-                    <Item key="no-group">未分组成员</Item>
-                    <Item key="no-good">未达标成员</Item>
-                    <Item key="no-in-team">被淘汰成员</Item>
+                <ItemGroup key={other} title="未分组成员 && 未达标成员">
+                    <Item {...noGroup}>未分组成员</Item>
+                    <Item {...noGood}>未达标成员</Item>
+                    <Item {...noInTeam}>被淘汰成员</Item>
                 </ItemGroup>
             </SubMenu>
-            <SubMenu key="task" title={SubMenuTitle("schedule", "实验室任务")}>
-                <Item key="code">代码/工程</Item>
-                <Item key="alg">算法</Item>
-                <Item key="share">本周分享</Item>
+            <SubMenu key={task} title={SubMenuTitle("schedule", "实验室任务")}>
+                <Item {...code}>代码/工程</Item>
+                <Item {...alg}>算法</Item>
+                <Item {...share}>本周分享</Item>
             </SubMenu>
             {
                 getOther['admin']()
             }
-            <SubMenu key="own" title={SubMenuTitle("book", "月总结")}>
-                <Item>提交月总结</Item>
+            <SubMenu key={own} title={SubMenuTitle("book", "月总结")}>
+                <Item {...submit}>
+                    <Link to="/submit">提交月总结</Link>
+                </Item>
                 <Item>图文投稿</Item>
                 <Item>团队成员月总结</Item>
             </SubMenu>
-            <Item key="rule">
+            <Item key={rule}>
                 <Link to="/rule">
                     <Icon type="solution" />
                     <span>团队制度</span>

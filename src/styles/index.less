@@ -33,14 +33,15 @@ html, body {
 }
 .route-enter.route-enter-active {
     opacity: 1;
-    transition: all 300ms ease-in;
+    transition: opacity .5s cubic-bezier(1,-0.34, 0, 1.08);
+    transition-delay: 100ms;
 }
 .route-leave {
-    opacity: 1;
+    opacity: 0.1;
 }
 .route-leave.route-leave-active {
     opacity: 0;
-    transition: all 300ms ease-in;
+    transition: all 100ms;
 }
 .add-team {
     margin-bottom: 1rem;
