@@ -16,8 +16,8 @@ const Container = ({ children, location }) => (
             component="div"
             className="tranistion-wrapper"
             transitionName="router"
-            transitionEnterTimeout={600}
-            transitionLeaveTimeout={100}
+            transitionEnterTimeout={100}
+            transitionLeaveTimeout={500}
         >
         <div key={location.pathname} className="router-container">
             {children}
@@ -49,10 +49,12 @@ const hasLogin = () => {
 
 export default (
     <Route path="/" component={Container}>
-        <Route path="team" component={TeamPage} />
-        <Route path="rule" component={RulePage} />
-        <Route path="submit" component={SubmitPage} />
+        <Route onEnter={checkAuth}>
+            <Route path="team" component={TeamPage} />
+            <Route path="rule" component={RulePage} />
+            <Route path="submit" component={SubmitPage} />
+            <IndexRoute component={IndexPage} />
+        </Route>
         <Route path="sign" component={SignPage} onEnter={hasLogin} />
-        <IndexRoute component={IndexPage} />
     </Route>
 );

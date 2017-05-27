@@ -5,12 +5,12 @@ const wrapper = function(obj, key, ...item) {
     return key ? obj[key].apply(obj, item) : obj;
 };
 
-const BaseAPI = (method, key) => (url, token, data) => {
+const BaseAPI = (method, key) => ({ url, body, token }) => {
     return new Promise((resolve, reject) => {
         wrapper(
             request[method](`${target}${url}`)
                 .set('Cookie', `token=${token}`),
-            key, data
+            key, body
         ).end((err, res) => {
             if (err == null) {
                 resolve(res.body);

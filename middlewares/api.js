@@ -32,11 +32,13 @@ export default () => async (ctx, next) => {
         await next();
     } else {
         try {
-            const res = await API[method.toLowerCase()](
-                matches[1],
-                ctx.cookies.get('token'),
-                body
-            );
+            const token = ctx.cookies.get('token');
+            console.log(token);
+            const res = await API[method.toLowerCase()]({
+                url: matches[1],
+                body,
+                token
+            });
             if (res && res.token) {
                 ctx.cookies.set('token', res.token);
             }

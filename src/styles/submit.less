@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.submit-wrapper {
+    @divide: 0.5rem;
+    @warpper-div: 2rem;
+    padding: @warpper-div;
+    margin-top: @warpper-div;
+    .ant-row {
+        margin-left: @divide;
+        margin-right: @divide;
+        & > div {
+            padding: @divide;
+            height: 100%;
+            .ant-card {
+                box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+                border-color: transparent;
+            }
+        }
+    }
+}
+.submit-button {
+    text-align: center;
+}
+.submit-loading-wrapper {
+    text-align: center;
+    margin: 5rem;
+    .ant-spin-dot {
+        left: 12px;
+    }
+    .ant-spin-text {
+        margin-top: 0.5rem;
+    }
+}

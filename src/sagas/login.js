@@ -12,7 +12,7 @@ function *loginAsync(action) {
             localStorage = getLocalStorage();
         yield put(LoginSuccess(token));
         localStorage && localStorage.setItem('token', token);
-        browserHistory.push('/');
+        browserHistory.push('/team');
     } catch(err) {
         yield put(LoginFail(err));
     }

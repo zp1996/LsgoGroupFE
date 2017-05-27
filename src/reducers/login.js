@@ -2,7 +2,7 @@ import { LOGIN, LOGIN_SUCCESS, LOGIN_FAIL } from 'Constants/actions';
 import { newObj } from 'Helpers/EsExtend';
 
 const initialState = {
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE0OTQ5Mjc0NTZ9.ohhq-vjYvJdHY-H-jp1-t-a6QGyyk8W4yXLxSuIKLi4',
+    token: '',
     pending: false,
     error: null
 };
