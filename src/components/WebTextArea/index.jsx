@@ -1,8 +1,12 @@
 import React from 'react';
+import styles from './index.less';
 
-const WebTextArea = ({ title, value, change }) => (
+const WebTextArea = ({ title, value, place, change }) => (
     <div>
-        <h1>{ title }</h1>
+        <h6>{ title }</h6>
+        <textarea placeholder={place || '暂无'}
+            className="web-textarea">
+        </textarea>
     </div>
 );
 

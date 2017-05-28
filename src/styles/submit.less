@@ -1,16 +1,15 @@
 @charset "UTF-8";
 
+@divide: 0.5rem;
+@warpper-div: 2rem;
 .submit-wrapper {
-    @divide: 0.5rem;
-    @warpper-div: 2rem;
     padding: @warpper-div;
-    margin-top: @warpper-div;
     .ant-row {
         margin-left: @divide;
         margin-right: @divide;
+        height: 550px;
         & > div {
             padding: @divide;
-            height: 100%;
             .ant-card {
                 box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
                 border-color: transparent;
@@ -20,6 +19,7 @@
 }
 .submit-button {
     text-align: center;
+    margin-top: @warpper-div;
 }
 .submit-loading-wrapper {
     text-align: center;

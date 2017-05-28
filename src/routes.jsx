@@ -19,7 +19,7 @@ const Container = ({ children, location }) => (
             transitionEnterTimeout={100}
             transitionLeaveTimeout={500}
         >
-        <div key={location.pathname} className="router-container">
+        <div className="router-container">
             {children}
         </div>
     </ReactCSSTransitionGroup>
@@ -41,7 +41,7 @@ const hasLogin = () => {
         routing: { locationBeforeTransitions: { pathname } },
         login: { token: storeToken }
     } = store.getState();
-    pathname = pathname === '/sign' ? '/' : pathname;
+    pathname = pathname === '/sign' ? '/team' : pathname;
     if (token != null && storeToken === token) {
         browserHistory.push(pathname);
     }
