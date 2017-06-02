@@ -1,11 +1,11 @@
 import {
-    TEAM_GET, TEAM_GET_SUCCESS, TEAM_GET_FAIL,
-    TEAM_ERR_REMOVE, TEAM_CHANGE_MODAL,
+    TEAM_GET, TEAM_ERR_REMOVE, TEAM_CHANGE_MODAL,
     TEAM_ADD, TEAM_ADD_SUCCESS, TEAM_ADD_FAIL,
     TEAM_DEL, TEAM_DEL_FAIL,
     TEAM_UPDATE_SUCCESS
  } from 'Constants/actions';
 import { newObj } from 'Helpers/EsExtend';
+import { asyncReducer, compose } from './enhancer';
 
 const initialState = {
     pending: false,
@@ -16,7 +16,6 @@ const initialState = {
 
 const team = (state = initialState, action) => {
     switch (action.type) {
-        case TEAM_GET:
         case TEAM_ADD:
             return newObj(state, {
                 pending: true
@@ -36,27 +35,15 @@ const team = (state = initialState, action) => {
             return newObj(state, {
                 modal: action.modal
             });
-        case TEAM_GET_SUCCESS:
-            return newObj(state, {
-                pending: false,
-                error: null,
-                data: action.data
-            });
-        case TEAM_GET_FAIL:
-            return newObj(state, {
-                pending: false,
-                error: action.error
-            });
         case TEAM_ERR_REMOVE:
             return newObj(state, {
                 error: null
             });
         case TEAM_DEL:
-            const data = state.data.filter(
-                team => team.id !== action.id
-            );
             return newObj(state, {
-                data
+                data: state.data.filter(
+                    team => team.id !== action.id
+                )
             });
         case TEAM_DEL_FAIL:
             return newObj(state, {
@@ -64,13 +51,23 @@ const team = (state = initialState, action) => {
                 error: action.err
             });
         case TEAM_UPDATE_SUCCESS:
-            console.log(action.data);
+            const { data } = state;
+            data.some((item, index) => {
+                const flag = item.id === action.team.id;
+                if (flag) {
+                    data[index] = action.team;
+                }
+                return flag;
+            });
             return newObj(state, {
-
+                pending: false,
+                data
             });
         default:
             return state;
     }
 };
 
-export default team;
+export default compose(
+    team, asyncReducer(TEAM_GET)
+);

@@ -46,7 +46,7 @@ class TeamPage extends Layout {
             <Select value={value} style={{ width: 120 }} onChange={fn}>
                 <Option value={none}>暂无</Option>
                 {
-                    users ? users.map(user => {
+                    users && Array.isArray(users) ? users.map(user => {
                         const { id, username } = user;
                         return (
                             <Option value={id.toString()}
