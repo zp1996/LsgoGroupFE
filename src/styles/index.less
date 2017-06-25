@@ -21,28 +21,31 @@ html, body {
 }
 .caption-loop(6);
 
-.tranistion-wrapper {
-    position: relative;
+.web-menu {
+    height: 100%;
+    width: @meun-width;
+    float: left;
 }
-.router-container {
-    position: absolute;
+.web-wrapper {
     width: 100%;
-    margin-left: clac(100vw - 100%);
+    padding-left: @meun-width;
 }
-.route-enter {
+.web-main {
+    padding: 10px;
+}
+.router-enter {
     opacity: 0;
+    transform: translateY(50px);
 }
-.route-enter.route-enter-active {
+.router-enter.router-enter-active {
+    transition:
+        transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+        opacity 1.0s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform: translateY(0);
     opacity: 1;
-    transition: opacity .5s cubic-bezier(1,-0.34, 0, 1.08);
-    transition-delay: 100ms;
 }
-.route-leave {
-    opacity: 0.1;
-}
-.route-leave.route-leave-active {
-    opacity: 0;
-    transition: all 100ms;
+.router-leave {
+    display: none;
 }
 .add-team {
     margin-bottom: 1rem;

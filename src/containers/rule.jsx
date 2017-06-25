@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Rule from 'Components/Rule';
-import { rule } from 'Constants/menu';
-import Layout from './layout';
 
 const rules = [{
     title: '团队成员必须遵守的三项制度：',
@@ -22,19 +20,8 @@ const rules = [{
     ]
 }];
 
-class RulePage extends Layout {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return this.layout(
-            <Rule rules={rules} />, { select: rule }
-        );
-    }
-}
-// 防止切换页面时产生不必要re-render
-export default connect(
-    state => ({
-        team: state.team
-    })
-)(RulePage);
+export default connect()(
+    () => (
+        <Rule rules={rules} />
+    )
+);

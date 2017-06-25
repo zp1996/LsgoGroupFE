@@ -2,11 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Menu, Icon } from 'antd';
 import {
-    task, code, alg, share,
-    team, teamHandle,
-    other, noGroup, noGood, noInTeam,
-    rule,
-    own, submit
+    task, code, alg, share, own, submit,
+    team, other, noGroup, noGood, noInTeam, rule
 } from 'Constants/menu';
 
 const { Item, ItemGroup, SubMenu } = Menu;
@@ -20,8 +17,8 @@ const SubMenuTitle = (icon, title) => (
 
 const getOther = {
     admin: () => (
-        <SubMenu key={team} title={SubMenuTitle("code-o", "实验室管理")}>
-            <Item {...teamHandle}>
+        <SubMenu key="group" title={SubMenuTitle("code-o", "实验室管理")}>
+            <Item {...team}>
                 <Link to="/team">小组管理</Link>
             </Item>
             <Item>图文申请</Item>
@@ -50,28 +47,28 @@ const WebMenu = ({ select, open, groups }) => {
                         ))
                     }
                 </ItemGroup>
-                <ItemGroup key={other} title="未分组成员 && 未达标成员">
+                <ItemGroup key={other.select} title="未分组成员 && 未达标成员">
                     <Item {...noGroup}>未分组成员</Item>
                     <Item {...noGood}>未达标成员</Item>
                     <Item {...noInTeam}>被淘汰成员</Item>
                 </ItemGroup>
             </SubMenu>
-            <SubMenu key={task} title={SubMenuTitle("schedule", "实验室任务")}>
-                <Item {...code}>代码/工程</Item>
-                <Item {...alg}>算法</Item>
-                <Item {...share}>本周分享</Item>
+            <SubMenu key={task.select} title={SubMenuTitle("schedule", "实验室任务")}>
+                <Item key={code.key}>代码/工程</Item>
+                <Item key={alg.key}>算法</Item>
+                <Item key={share.key}>本周分享</Item>
             </SubMenu>
             {
                 getOther['admin']()
             }
-            <SubMenu key={own} title={SubMenuTitle("book", "月总结")}>
-                <Item {...submit}>
+            <SubMenu key={own.select} title={SubMenuTitle("book", "月总结")}>
+                <Item key={submit.key}>
                     <Link to="/submit">提交月总结</Link>
                 </Item>
                 <Item>图文投稿</Item>
                 <Item>团队成员月总结</Item>
             </SubMenu>
-            <Item key={rule}>
+            <Item key={rule.select}>
                 <Link to="/rule">
                     <Icon type="solution" />
                     <span>团队制度</span>

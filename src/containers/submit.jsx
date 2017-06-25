@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, Col, Row, Button, Icon, Spin } from 'antd';
 import WebTextArea from 'Components/WebTextArea';
 import { get } from 'Helpers/EsExtend';
 import { showErr } from 'Helpers/component';
-import { submit } from 'Constants/menu';
 import { Clear } from 'Actions/submit';
 import { GET_SUBMIT_ASYNC, SUBMIT_SUBMIT_ASYNC } from 'Constants/sagas';
-import Layout from './layout';
 
 const attrs = [ 'hasdo', 'wechat', 'code', 'other', 'todo' ];
 
 @connect(
     state => ({
-        team: state.team,
         submit: state.submit
     })
 )
-class SubmitPage extends Layout {
+class SubmitPage extends Component {
     static initState() {
         const state = {};
         attrs.forEach(attr => {
@@ -110,12 +107,11 @@ class SubmitPage extends Layout {
     }
     render() {
         const { submit: { data } } = this.props;
-        const dom = data ? this.hasDataRender() : (
+        return  data ? this.hasDataRender() : (
             <div className="submit-loading-wrapper">
                 <Spin tip="Loading..." />
             </div>
         );
-        return this.layout(dom, submit);
     }
 }
 

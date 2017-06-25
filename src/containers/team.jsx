@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, Input, Select, Spin } from 'antd';
 import WebTable from 'Components/WebTable';
@@ -9,20 +9,16 @@ import {
     TEAM_GET_ASYNC, TEAM_ADD_ASYNC,
     TEAM_DEL_ASYNC, TEAM_UPDATE_ASYNC
 } from 'Constants/sagas';
-import { teamHandle } from 'Constants/menu';
-import Layout from './layout';
 
 const after = '小组',
     none = 'null',
     pattern = /\./g,
     Option = Select.Option;
 
-@connect(
-    state => ({
-        team: state.team
-    })
-)
-class TeamPage extends Layout {
+@connect(state => ({
+    team: state.team
+}))
+class TeamPage extends Component {
     static columns = [
         { name: '小组名' },
         { number: '小组人数' },
@@ -159,7 +155,7 @@ class TeamPage extends Layout {
     render() {
         const { team: { pending, data, error, modal } } = this.props,
             { groupname, users, leader, mentor, status } = this.state;
-        return this.layout(
+        return (
             <div>
                 <div className="add-team">
                     <Button type="primary" icon="plus"
@@ -193,7 +189,7 @@ class TeamPage extends Layout {
                 <WebTable getData={this.getData} data={data} error={error}
                     loading={pending} columns={TeamPage.columns}
                     removeErr={this.removeErr} />
-            </div>, teamHandle
+            </div>
         );
     }
 }
