@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Menu, Icon } from 'antd';
 import {
-    task, code, alg, share, own, submit,
+    task, code, alg, share, own, submit, groupTask,
     team, other, noGroup, noGood, noInTeam, rule
 } from 'Constants/menu';
 
@@ -22,7 +22,9 @@ const getOther = {
                 <Link to="/team">小组管理</Link>
             </Item>
             <Item>图文申请</Item>
-            <Item>小组任务</Item>
+            <Item {...groupTask}>
+                <Link to="/group-task">小组任务</Link>
+            </Item>
         </SubMenu>
     ),
     grouper: () => (

@@ -4,9 +4,13 @@ import WebMenu from 'Components/WebMenu';
 import * as config from 'Constants/menu';
 
 const LeftMenu = ({ pathname, team }) => {
+    const key = pathname.slice(1).replace(
+        /\-([a-z])/,
+        (_, $1) => $1.toUpperCase()
+    );
     return (
         <div className="web-menu">
-            <WebMenu {...config[pathname.slice(1)]} groups={team} />
+            <WebMenu {...config[key]} groups={team} />
         </div>
     );
 };

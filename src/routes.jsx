@@ -9,6 +9,7 @@ import SignPage from 'Containers/sign';
 import TeamPage from 'Containers/team';
 import RulePage from 'Containers/rule';
 import SubmitPage from 'Containers/submit';
+import TaskPage from 'Containers/task';
 
 const Layout = ({ children, location }) => {
     return (
@@ -54,11 +55,12 @@ const hasLogin = () => {
 };
 
 export default (
-    <Route path="/" component={Layout}>
-        <Route onEnter={checkAuth}>
+    <Route path="/">
+        <Route onEnter={checkAuth} component={Layout}>
             <Route path="team" component={TeamPage} />
             <Route path="rule" component={RulePage} />
             <Route path="submit" component={SubmitPage} />
+            <Route path="group-task" component={TaskPage} />
             <IndexRoute component={IndexPage} />
         </Route>
         <Route path="sign" component={SignPage} onEnter={hasLogin} />

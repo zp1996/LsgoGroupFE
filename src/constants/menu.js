@@ -15,6 +15,8 @@ export const [ team ] = getDes(['team-handle'], group);
 export const task  = { select: 'task' };
 export const [ code, alg, share ] = getDes(['code', 'alg', 'share'], task);
 
+export const [ groupTask ] = getDes(['group-task'], group);
+
 export const other = { select: 'other'};
 export const [ noGroup, noGood, noInTeam ] = getDes(
     ['no-group', 'no-good', 'no-in-team'],
